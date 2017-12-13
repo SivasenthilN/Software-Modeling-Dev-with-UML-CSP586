@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>Housing Dashboard</title>
+<!-- All the CSS files and the JavaScript Library files are linked to the local directory in the below section-->
+	<link rel="icon" href="images/icon.png" type="image/png" />
+    <link rel="stylesheet" type="text/css" href="styles/Custom.css">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="styles/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+	<script src="node_modules/es6/ES6.js"></script>
+	<script src="node_modules/file-saver/FileSaver.js"></script>
+	<script src="node_modules/dataframe-js/dist/dataframe.js"></script>
+	<script src="node_modules/chart.js/dist/Chart.js"></script>
+	<script src="js/HousingMain.js"></script>
+	<script src="js/ModelUtility.js"></script>
+	<script src="js/ControllerUtility.js"></script>
+	<script src="js/constants/Constant.js"></script>
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="DataTables-1.10.15/media/js/canvasjs.min.js"></script>
+	<script src="DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
+	<script src="DataTables-1.10.15/media/js/dataTables.jqueryui.min.js"></script>
+	<script src="DataTables-1.10.15/media/js/dataTables.bootstrap.min.js"></script>
+	
+</head>
+<body>
+<div>
+
+<img src="images/logo_final.jpg" height="350" width="100%">
+</div>
+	<div class="datasetName">
+	<h3>Select the Dataset</h3>
+	</div>
+    <div>         
+        <form style="width:66%">
+		<div>
+		<!-- selection of dataset "housing and development functionalities" of 5 different cities in United States--> 
+          <select id="datasets">
+              <option value="austin.csv" selected="selected">Austin</option>              
+              <option value="chicago.csv">Chicago</option>
+              <option value="conencticut.csv">Conencticut</option>
+              <option value="seattle.csv">Seattle</option>
+              <option value="nyc.csv">NewYork</option>
+        </select>          <br><br>
+		
+		<!-- fetch() is the function which is used in the Class Dataset to get the data and load it using dataframe-->
+        <input type="button" name="Select" onclick="fetch()" value="Load Dataset" ></input><br><br>
+      
+ <div id="table" class="table-responsive dataTable"></div>
+		</div>
+        </form>
+		<div id="filter"></div>
+		<div id="filter-row"  hidden="true">
+			<br>
+			<!-- Selection of columns which contains the Strings in the dataset-->
+			<div id="categorical-filter">
+				<label style="display:block;font-weight:bold">Please Select the you want to apply Filters</label>
+				<div align="center"id="categorical-filter-checkbox" style="display:flex; flex-flow:row wrap;"></div>
+			</div>
+			<br>
+			
+			<!-- filtering operation for the numerical value -->
+			<div id="numerical-condition">
+				<label style="display:block;font-weight:bold">Please Select The Filter Conditions</label>
+				<input type="radio" name="numericalFilter" value="greaterThanEqualTo"> Greater Than Equal To </input><br />
+				<input type="radio" name="numericalFilter" value="lessThanEqualTo"> Less Than Equal To</input><br />
+				<input type="radio" name="numericalFilter" value="equalTo"> Equal To</input><br />
+			</div>
+			<br>
+			
+			<!-- Selection of columns which contains the numerical value in the dataset-->
+			<div id="numerical-value">
+				<label style="display:block;font-weight:bold">Please Enter Numerical Value To Filter</label>
+				<input id= "numericalFilter" style="background-color: white; border: groove;color: black;padding: 1px 0px; text-align: center; text-decoration: none;"  type="number" name="numericalFilter" value="numericalFilter"></input>
+			</div>
+			<br>
+			
+			
+			<div id="plot-graph">
+			<form>
+				<label style="display:block;font-weight:bold">Please Select the Chart Types to load </label>
+				<input type="checkbox" id="barChart" name="barChart" value="Bar Chart"> Bar Chart</input>
+				<input type="checkbox" id="pieChart" name="pieChart" value="Pie Chart"> Pie Chart</input>
+				<input type="checkbox" id="lineChart" name="lineChart" value="Line Chart"> Line Chart</input>
+				<input type="checkbox" id="doughnutChart" name="doughnutChart" value="Doughnut Chart"> Doughnut Chart</input><br /><br />
+				<input type="button" name="applyCharts" onclick="applyChart()" value="Apply Charts"></input><br>
+				<!-- applyChart() is the function which is used to call the plot() function which is present in the class Chartoperation-->
+			</form>	
+			</div>
+		</div>
+    </div>
+
+	<!-- canvas of all the charts are assigned in the webpage in the below part-->
+	<div id="parentChart" hidden="true">
+		<div id="childChart" class="chart">
+			<canvas id="piechartcanvas"></canvas>
+			<canvas id="barchartcanvas"></canvas>
+			<canvas id="linechartcanvas"></canvas>
+			<canvas id="doughnutchartcanvas"></canvas>
+			<br/>
+		</div>
+	
+	</div>
+<div class="seperator"></div>
+	<br><br><br><br><br><br>
+<footer>Copyright &copy; UML_Team_24</footer>
+</body>
+</html>
+
